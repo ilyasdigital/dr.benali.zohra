@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr Benali Zohra - Chirurgien Dentiste | Casablanca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --secondary: #f59e0b;
+            --accent: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        .baskerville {
+            font-family: 'Libre Baskerville', serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 50%, #6366f1 100%);
+        }
+        
+        .section-divider {
+            height: 100px;
+            background: linear-gradient(to bottom right, transparent 49%, var(--light) 50%);
+        }
+        
+        .floating-card {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .floating-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .parallax-bg {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .stagger-animation > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+        
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            height: 250px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(14, 165, 233, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary);
+        }
+        
+        .timeline-item:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 17px;
+            width: 2px;
+            height: calc(100% + 10px);
+            background-color: #e2e8f0;
+        }
+        
+        .timeline-item:last-child:after {
+            display: none;
+        }
+        
+        /* Contact Form Styles */
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+        
+        .contact-form button {
+            background: linear-gradient(135deg, var(--primary) 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, #3b82f6 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 py-4 transition-all duration-300 gradient-bg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="bg-white p-2 rounded-xl shadow-lg">
+                        <i class="fas fa-tooth text-2xl text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <h1 class="text-xl font-bold text-white baskoville">Dr Benali Zohra</h1>
+                        <p class="text-xs text-blue-100">Chirurgien Dentiste</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#accueil" class="text-white hover:text-blue-200 font-medium transition duration-300">Accueil</a>
+                    <a href="#expertise" class="text-white hover:text-blue-200 font-medium transition duration-300">Expertise</a>
+                    <a href="#services" class="text-white hover:text-blue-200 font-medium transition duration-300">Services</a>
+                    <a href="#apropos" class="text-white hover:text-blue-200 font-medium transition duration-300">À Propos</a>
+                    <a href="#contact" class="text-white hover:text-blue-200 font-medium transition duration-300">Contact</a>
+                    <a href="#rendezvous" class="bg-white text-blue-600 hover:bg-blue-50 font-medium py-2 px-6 rounded-full transition duration-300">Prendre RDV</a>
+                </div>
+                
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white text-2xl">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed inset-0 bg-white z-40 md:hidden">
+        <div class="flex justify-end p-6">
+            <button id="menu-close" class="text-gray-600 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center h-full space-y-8">
+            <a href="#accueil" class="text-2xl font-medium text-gray-800 hover:text-blue-600 transition duration-300">Accueil</a>
+            <a href="#expertise" class="text-2xl font-medium text-gray-800 hover:text-blue-600 transition duration-300">Expertise</a>
+            <a href="#services" class="text-2xl font-medium text-gray-800 hover:text-blue-600 transition duration-300">Services</a>
+            <a href="#apropos" class="text-2xl font-medium text-gray-800 hover:text-blue-600 transition duration-300">À Propos</a>
+            <a href="#contact" class="text-2xl font-medium text-gray-800 hover:text-blue-600 transition duration-300">Contact</a>
+            <a href="#rendezvous" class="bg-blue-600 text-white font-medium py-3 px-8 rounded-full mt-4 transition duration-300">Prendre RDV</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="gradient-bg pt-32 pb-20 md:pt-40 md:pb-32 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-72 h-72 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 stagger-animation">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 baskoville">L'Art du Sourire Parfait</h1>
+                    <p class="text-xl mb-8 text-blue-100">Spécialiste en dentisterie esthétique, orthodontie et implants dentaires à Casablanca. Votre sourire est notre priorité.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#rendezvous" class="bg-white text-blue-600 hover:bg-blue-50 font-medium py-3 px-8 rounded-full text-center transition duration-300">Prendre Rendez-vous</a>
+                        <a href="#services" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 font-medium py-3 px-8 rounded-full text-center transition duration-300">Découvrir nos Services</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center stagger-animation">
+                    <div class="relative">
+                        <div class="w-80 h-80 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-lg">
+                            <div class="w-64 h-64 bg-white/20 rounded-full flex items-center justify-center">
+                                <img src="./DR.jpg" alt="Dr Benali Zohra" class="w-48 h-48 rounded-full object-cover border-4 border-white">
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -right-4 bg-white text-blue-600 py-2 px-4 rounded-full shadow-lg">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                <span class="text-sm font-medium">Disponible aujourd'hui</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="stagger-animation">
+                    <div class="stat-number">15+</div>
+                    <p class="text-gray-600">Années d'expérience</p>
+                </div>
+                <div class="stagger-animation">
+                    <div class="stat-number">2000+</div>
+                    <p class="text-gray-600">Patients satisfaits</p>
+                </div>
+                <div class="stagger-animation">
+                    <div class="stat-number">98%</div>
+                    <p class="text-gray-600">Taux de réussite</p>
+                </div>
+                <div class="stagger-animation">
+                    <div class="stat-number">5</div>
+                    <p class="text-gray-600">Certifications internationales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 baskoville">Domaines d'Expertise</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Le Dr Benali Zohra est spécialisée dans plusieurs domaines de la dentisterie moderne, alliant expertise technique et sens esthétique.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="floating-card bg-white rounded-2xl p-8 stagger-animation">
+                    <div class="service-icon bg-blue-100 text-blue-600">
+                        <i class="fas fa-star-of-life text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Dentisterie Esthétique</h3>
+                    <p class="text-gray-600">Transformez votre sourire avec nos traitements esthétiques sur mesure : blanchiment, facettes et plus encore.</p>
+                </div>
+                
+                <div class="floating-card bg-white rounded-2xl p-8 stagger-animation">
+                    <div class="service-icon bg-amber-100 text-amber-600">
+                        <i class="fas fa-teeth text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Orthodontie</h3>
+                    <p class="text-gray-600">Corrigez l'alignement de vos dents avec des solutions discrètes et efficaces comme Invisalign.</p>
+                </div>
+                
+                <div class="floating-card bg-white rounded-2xl p-8 stagger-animation">
+                    <div class="service-icon bg-green-100 text-green-600">
+                        <i class="fas fa-tooth text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Implants Dentaires</h3>
+                    <p class="text-gray-600">Restaurez vos dents manquantes avec des implants de haute qualité qui durent toute une vie.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 baskoville">Nos Services</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Découvrez notre gamme complète de services dentaires conçus pour répondre à tous vos besoins de santé bucco-dentaire.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="floating-card bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-snowflake text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Blanchiment Dentaire</h3>
+                    </div>
+                    <p class="text-gray-600">Obtenez un sourire plus blanc et plus éclatant avec notre traitement de blanchiment professionnel.</p>
+                </div>
+                
+                <div class="floating-card bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-gem text-amber-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Facettes Dentaires</h3>
+                    </div>
+                    <p class="text-gray-600">Corrigez les imperfections dentaires avec des facettes en porcelaine ultra-minces et naturelles.</p>
+                </div>
+                
+                <div class="floating-card bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-align-center text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Invisalign</h3>
+                    </div>
+                    <p class="text-gray-600">Redressez vos dents discrètement avec les aligneurs transparents Invisalign.</p>
+                </div>
+                
+                <div class="floating-card bg-gradient-to-br from-purple-50 to-violet-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-implant text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Implants Dentaires</h3>
+                    </div>
+                    <p class="text-gray-600">Remplacez vos dents manquantes par des implants fixes et durables.</p>
+                </div>
+                
+                <div class="floating-card bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-pink-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-teeth-open text-pink-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Soins Orthodontiques</h3>
+                    </div>
+                    <p class="text-gray-600">Traitements complets pour corriger l'alignement des dents chez les enfants et les adultes.</p>
+                </div>
+                
+                <div class="floating-card bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 stagger-animation">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-cyan-100 p-3 rounded-xl mr-4">
+                            <i class="fas fa-laser text-cyan-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800">Dentisterie Laser</h3>
+                    </div>
+                    <p class="text-gray-600">Traitements de pointe utilisant la technologie laser pour plus de précision et de confort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12 stagger-animation">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 baskoville">Dr Benali Zohra</h2>
+                    <p class="text-gray-600 mb-6">Chirurgien-dentiste passionnée par l'art dentaire et l'esthétique du sourire, le Dr Benali Zohra allie expertise technique et sensibilité artistique pour offrir à ses patients des soins dentaires de la plus haute qualité.</p>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Parcours Professionnel</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h4 class="font-bold text-gray-800">Master en Dentisterie Adhésive et Esthétique</h4>
+                                <p class="text-gray-600">Université de Genève, 2018</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold text-gray-800">Certification Invisalign</h4>
+                                <p class="text-gray-600">Spécialiste des aligneurs transparents</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h4 class="font-bold text-gray-800">Formation en Facettes Céramiques</h4>
+                                <p class="text-gray-600">Helvetic Dental Center, Genève</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#contact" class="inline-flex items-center text-blue-600 font-medium">
+                        <span>Prendre Rendez-vous</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="lg:w-1/2 stagger-animation">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <div class="text-blue-600 text-3xl mb-2">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 mb-2">Certifications Internationales</h4>
+                                <p class="text-gray-600 text-sm">Formée aux meilleures techniques dentaires en Europe</p>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <div class="text-green-600 text-3xl mb-2">
+                                    <i class="fas fa-user-md"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 mb-2">Approche Personnalisée</h4>
+                                <p class="text-gray-600 text-sm">Chaque traitement est adapté aux besoins du patient</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 mt-8">
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <div class="text-amber-600 text-3xl mb-2">
+                                    <i class="fas fa-teeth"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 mb-2">Technologies de Pointe</h4>
+                                <p class="text-gray-600 text-sm">Équipement moderne pour des résultats optimaux</p>
+                            </div>
+                            <div class="bg-white rounded-2xl p-6 shadow-lg">
+                                <div class="text-purple-600 text-3xl mb-2">
+                                    <i class="fas fa-smile"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800 mb-2">Satisfaction Garantie</h4>
+                                <p class="text-gray-600 text-sm">Des milliers de patients nous font confiance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 baskoville">Galerie</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Découvrez l'ambiance de notre cabinet et quelques-uns de nos traitements réussis.</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://plus.unsplash.com/premium_photo-1674368232044-31d75efc09fa?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZGVudGlzdHJ5fGVufDB8fDB8fHww" alt="Cabinet dentaire">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://plus.unsplash.com/premium_photo-1661270434240-51fe304cb3e9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZGVudGlzdHJ5fGVufDB8fDB8fHww" alt="Équipement moderne">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://plus.unsplash.com/premium_photo-1674368232234-f39f32a6915f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGRlbnRpc3RyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Blanchiment dentaire">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1670250492416-570b5b7343b1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGRlbnRpc3RyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Implants dentaires">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1667133295352-ef4c83620e8e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzB8fGRlbnRpc3RyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Facettes dentaires">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1560070201-d3d11effa179?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGRlbnRpc3RyeXxlbnwwfHwwfHx8MA%3D%3D" alt="Dentisterie laser">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus text-3xl text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 baskoville">Contactez-nous</h2>
+                <p class="text-gray-600 max-w-3xl mx-auto">Prenez rendez-vous ou posez-nous vos questions. Notre équipe est à votre écoute.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Contact Information -->
+                <div class="lg:col-span-1">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 baskoville">Informations de contact</h3>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Adresse</h4>
+                            <p class="text-gray-600">Casablanca, Maroc</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Téléphone</h4>
+                            <p class="text-gray-600">+212 XXX XXX XXX</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Email</h4>
+                            <p class="text-gray-600">contact@drbenalizohra.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Horaires d'ouverture</h4>
+                            <p class="text-gray-600">Lun - Ven: 8h30 - 18h30</p>
+                            <p class="text-gray-600">Samedi: 9h00 - 13h00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-lg p-8">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6 baskoville">Envoyez-nous un message</h3>
+                        
+                        <form class="contact-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Nom complet</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Adresse email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-700 mb-2">Sujet</label>
+                                <input type="text" id="subject" name="subject" required>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="w-full md:w-auto">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="mt-16">
+                <div class="map-container h-96">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5063.192700298619!2d-7.6359783222900415!3d33.591508399999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7d2f40efa492f%3A0x85702421c65d3c37!2sBenali%20Zohra%20(Chirurgien%20Dentiste)!5e1!3m2!1sen!2sma!4v1758997584523!5m2!1sen!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="bg-white p-2 rounded-xl mr-3">
+                            <i class="fas fa-tooth text-blue-500"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold baskoville">Dr Benali Zohra</h3>
+                            <p class="text-sm text-blue-100">Chirurgien Dentiste</p>
+                        </div>
+                    </div>
+                    <p class="text-blue-100">Votre spécialiste en dentisterie esthétique et fonctionnelle à Casablanca.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Liens rapides</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-blue-100 hover:text-white transition duration-300">Accueil</a></li>
+                        <li><a href="#expertise" class="text-blue-100 hover:text-white transition duration-300">Expertise</a></li>
+                        <li><a href="#services" class="text-blue-100 hover:text-white transition duration-300">Services</a></li>
+                        <li><a href="#apropos" class="text-blue-100 hover:text-white transition duration-300">À Propos</a></li>
+                        <li><a href="#contact" class="text-blue-100 hover:text-white transition duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Nos services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-300">Blanchiment dentaire</a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-300">Facettes dentaires</a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-300">Implants dentaires</a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-300">Orthodontie</a></li>
+                        <li><a href="#" class="text-blue-100 hover:text-white transition duration-300">Dentisterie laser</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contactez-nous</h4>
+                    <address class="text-blue-100 not-italic">
+                        <p class="mb-2">Casablanca, Maroc</p>
+                        <p class="mb-2">+212 XXX XXX XXX</p>
+                        <p class="mb-2">contact@drbenalizohra.com</p>
+                    </address>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="bg-white/10 hover:bg-white/20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-white/10 hover:bg-white/20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-white/10 hover:bg-white/20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-blue-300/30 mt-8 pt-8 text-center text-blue-100">
+                <p>&copy; 2023 Dr Benali Zohra - Chirurgien Dentiste. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/212XXXXXXXXX?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment." target="_blank" class="floating-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+        });
+
+        menuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Contact form submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Merci pour votre message! Nous vous contacterons bientôt.');
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
